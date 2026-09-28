@@ -1,0 +1,114 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #222222;
+}
+
+header {
+    padding: 20px 30px;
+}
+
+nav a {
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+a {
+    color: #222222;
+    text-decoration: none;
+}
+
+a:hover {
+    color: tomato;
+}
+
+main {
+    margin: 0 30px 30px;
+}
+
+form {
+    max-width: 500px;
+}
+
+.form-field {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+}
+
+input,
+select,
+textarea,
+button {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #888888;
+}
+
+input[type="file"] {
+    max-width: 100%;
+}
+
+textarea {
+    resize: vertical;
+}
+
+fieldset {
+    margin: 0 0 18px;
+    padding: 12px;
+    border: 1px solid #888888;
+}
+
+button {
+    padding: 10px 20px;
+    border: 1px solid #777777;
+    background-color: #eeeeee;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #dddddd;
+}
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-image: url("../1/images/lunch.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.login-box {
+    width: 350px;
+    max-width: 100%;
+    margin: 0;
+    padding: 25px;
+    background-color: white;
+}
+
+.login-box h1 {
+    margin-top: 0;
+    text-align: center;
+}
