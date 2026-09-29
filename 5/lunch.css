@@ -1,0 +1,223 @@
+.dishes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.filter-button {
+    padding: 6px 12px;
+    border: 1px solid tomato;
+    border-radius: 8px;
+    color: tomato;
+    background-color: white;
+    cursor: pointer;
+}
+
+.filter-button:hover,
+.filter-button.active {
+    color: white;
+    background-color: tomato;
+}
+
+.dish {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 30px 40px;
+    border: 2px solid transparent;
+    border-radius: 35px;
+    cursor: pointer;
+    filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
+    background-color: white;
+}
+
+.dish:hover,
+.dish.selected {
+    border-color: tomato;
+}
+
+.dish:hover .add-button,
+.dish.selected .add-button {
+    background-color: tomato;
+}
+
+.dish-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 35px;
+}
+
+.dish-price,
+.dish-name {
+    margin: 10px 0 0;
+    font-size: 20px;
+}
+
+.dish-name {
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.dish-weight {
+    margin: 0;
+    color: gray;
+}
+
+.add-button {
+    margin-top: 10px;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: #f1eee9;
+    cursor: pointer;
+}
+
+input,
+select,
+textarea,
+button {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+}
+
+.order-section {
+    margin-top: 50px;
+}
+
+.order-title {
+    text-align: center;
+}
+
+.order-form {
+    max-width: 850px;
+    margin: 30px auto;
+}
+
+.order-columns {
+    display: flex;
+    gap: 60px;
+}
+
+.order-column {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.order-column > legend {
+    margin-bottom: 25px;
+    font-size: 20px;
+}
+
+.nothing-selected {
+    margin-top: 0;
+}
+
+.selected-item,
+.order-total {
+    margin-bottom: 25px;
+}
+
+.selected-title {
+    margin: 0;
+    font-weight: 700;
+}
+
+.selected-value,
+.total-price {
+    margin: 0;
+}
+
+.total-price {
+    font-size: 20px;
+}
+
+.form-field {
+    margin-bottom: 18px;
+}
+
+.form-field > label {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid gray;
+    background-color: white;
+}
+
+.form-field textarea {
+    resize: vertical;
+}
+
+.check-label {
+    display: block;
+    margin-bottom: 18px;
+}
+
+.form-note {
+    margin: 5px 0 0;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.delivery-options {
+    margin: 0 0 18px;
+    padding: 0;
+    border: none;
+}
+
+.delivery-options label {
+    display: block;
+    margin-top: 8px;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.form-buttons button {
+    padding: 8px 15px;
+    border: 1px solid gray;
+    background-color: white;
+    cursor: pointer;
+}
+
+.form-buttons button:hover {
+    background-color: #eeeeee;
+}
+
+@media (max-width: 800px) {
+    .dishes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .order-columns {
+        gap: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .dishes {
+        grid-template-columns: 1fr;
+    }
+
+    .order-columns {
+        flex-direction: column;
+    }
+}

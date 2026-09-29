@@ -1,0 +1,84 @@
+body {
+    display: block;
+    min-height: auto;
+    color: black;
+    background: white;
+    font-size: 12pt;
+}
+
+.navigation,
+.filters,
+.add-button,
+.order-section {
+    display: none;
+}
+
+.site-header,
+.content,
+.site-footer {
+    margin: 0;
+    padding: 10px 0;
+}
+
+.site-footer,
+.site-footer a {
+    color: black;
+    background: white;
+}
+
+.site-footer {
+    border-top: 1px solid black;
+}
+
+.about-image {
+    width: 250px;
+}
+
+.dishes {
+    display: block;
+}
+
+.dish {
+    display: block;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 0;
+    filter: none;
+    break-inside: avoid;
+}
+
+.dish-image {
+    float: left;
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    border-radius: 0;
+}
+
+.dish::after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.dish-price,
+.dish-name,
+.dish-weight {
+    margin: 0 0 5px;
+    color: black;
+    font-size: 12pt;
+}
+
+h2 {
+    break-after: avoid;
+}
+
+.popular-table {
+    width: 100%;
+    font-size: 12pt;
+}
+
+.popular-table tr {
+    break-inside: avoid;
+}
