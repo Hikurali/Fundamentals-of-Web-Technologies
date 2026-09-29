@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обед рядом — доставка бизнес-ланчей</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-white border-bottom py-3">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="index.html">Обед рядом</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Открыть меню">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Главная</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#advantages">Преимущества</a></li>
+                        <li class="nav-item"><a class="nav-link" href="lunch.html">Собрать ланч</a></li>
+                        <li class="nav-item"><a class="nav-link" href="orders.html">Заказы</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contacts">Контакты</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section py-5">
+            <div class="container py-lg-5">
+                <div class="row align-items-center g-5">
+                    <div class="col-12 col-lg-6">
+                        <p class="hero-label mb-2">Доставка бизнес-ланчей по Москве</p>
+                        <h1 class="display-4 fw-bold mb-4">Вкусный обед прямо в ваш офис</h1>
+                        <p class="lead text-secondary mb-4">
+                            «Обед рядом» готовит свежие комплексные обеды и привозит их
+                            в удобное для вас время с 7:00 до 23:00.
+                        </p>
+                        <div class="d-flex flex-column flex-sm-row gap-3">
+                            <a class="btn btn-accent btn-lg" href="lunch.html">Собрать ланч</a>
+                            <a class="btn btn-outline-dark btn-lg" href="#contacts">Связаться с нами</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <img class="hero-image img-fluid w-100" src="images/lunch.jpg" alt="Готовый бизнес-ланч с овощами и горячим блюдом">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5" id="advantages">
+            <div class="container py-lg-4">
+                <div class="row justify-content-center mb-4">
+                    <div class="col-12 col-lg-8 text-center">
+                        <h2 class="fw-bold">Почему выбирают нас</h2>
+                        <p class="text-secondary mb-0">Готовим понятные и сытные обеды на каждый рабочий день.</p>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-12 col-md-4">
+                        <article class="advantage-card h-100 p-4 text-center">
+                            <div class="advantage-icon mb-3" aria-hidden="true">🥗</div>
+                            <h3 class="h5 fw-bold">Свежие продукты</h3>
+                            <p class="text-secondary mb-0">Готовим блюда в день доставки и используем свежие овощи, мясо и рыбу.</p>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <article class="advantage-card h-100 p-4 text-center">
+                            <div class="advantage-icon mb-3" aria-hidden="true">🕐</div>
+                            <h3 class="h5 fw-bold">Удобное время</h3>
+                            <p class="text-secondary mb-0">Можно выбрать ближайшую доставку или заказать обед к определённому времени.</p>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <article class="advantage-card h-100 p-4 text-center">
+                            <div class="advantage-icon mb-3" aria-hidden="true">🍲</div>
+                            <h3 class="h5 fw-bold">Меню на любой вкус</h3>
+                            <p class="text-secondary mb-0">Соберите свой ланч из супа, горячего блюда, салата, напитка и десерта.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5">
+            <div class="container">
+                <div class="cta-block p-4 p-md-5">
+                    <div class="row align-items-center g-4">
+                        <div class="col-12 col-lg-8">
+                            <h2 class="fw-bold mb-2">Готовы выбрать обед?</h2>
+                            <p class="mb-0">Соберите подходящее комбо, укажите адрес и время доставки.</p>
+                        </div>
+                        <div class="col-12 col-lg-4 text-lg-end">
+                            <a class="btn btn-light btn-lg" href="lunch.html">Перейти к меню</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section py-5" id="contacts">
+            <div class="container py-lg-4">
+                <div class="row g-5">
+                    <div class="col-12 col-lg-5">
+                        <h2 class="fw-bold mb-4">Контакты</h2>
+                        <p class="text-secondary">Если у вас есть вопрос или пожелание, напишите нам через форму.</p>
+                        <div class="contact-item mb-3">
+                            <span class="fw-bold d-block">Телефон</span>
+                            <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+                        </div>
+                        <div class="contact-item mb-3">
+                            <span class="fw-bold d-block">Email</span>
+                            <a href="mailto:hello@obed-ryadom.ru">hello@obed-ryadom.ru</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="fw-bold d-block">Время работы</span>
+                            <span>Понедельник — пятница, 7:00–23:00</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-7">
+                        <div class="feedback-card p-4 p-md-5">
+                            <h2 class="h3 fw-bold mb-4">Обратная связь</h2>
+                            <form action="https://httpbin.org/post" method="post">
+                                <div class="row g-3">
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label" for="feedback-name">Имя</label>
+                                        <input class="form-control" type="text" id="feedback-name" name="name" required>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label" for="feedback-email">Email</label>
+                                        <input class="form-control" type="email" id="feedback-email" name="email" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label" for="feedback-phone">Телефон</label>
+                                        <input class="form-control" type="tel" id="feedback-phone" name="phone">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label" for="feedback-message">Сообщение</label>
+                                        <textarea class="form-control" id="feedback-message" name="message" rows="5" required></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-accent px-4" type="submit">Отправить</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row align-items-center g-2">
+                <div class="col-12 col-md-6 text-center text-md-start">© 2026 «Обед рядом»</div>
+                <div class="col-12 col-md-6 text-center text-md-end">Бизнес-ланчи с доставкой по Москве</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
