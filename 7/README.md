@@ -2,7 +2,10 @@
 
 ## Что сдать
 
-Сайт:
+Сайт на сервере:
+http://82.23.173.175/7/lunch.html
+
+Резервная ссылка GitHub Pages:
 https://hikurali.github.io/Fundamentals-of-Web-Technologies/7/lunch.html
 
 Репозиторий с кодом:
