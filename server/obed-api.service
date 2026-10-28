@@ -1,0 +1,23 @@
+[Unit]
+Description=Obed Ryadom menu and order API
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/obed-api
+Environment=OBED_DATABASE=/var/lib/obed-api/orders.sqlite3
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/obed-api/venv/bin/gunicorn --bind 127.0.0.1:8772 --workers 2 --threads 2 --timeout 30 "app:create_app()"
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/obed-api
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

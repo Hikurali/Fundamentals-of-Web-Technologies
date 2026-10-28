@@ -1,4 +1,4 @@
-const dishesApiUrl = "https://edu.std-900.ist.mospolytech.ru/labs/api/dishes";
+const dishesApiUrl = ownApiBaseUrl + "/labs/api/dishes";
 let dishes = [];
 
 async function loadDishes() {

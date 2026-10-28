@@ -3,18 +3,21 @@ const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
 const { test } = require("node:test");
+const { webcrypto } = require("node:crypto");
 
 const root = path.resolve(__dirname, "..");
 const menu = JSON.parse(fs.readFileSync(path.join(root, "demo-dishes.json"), "utf8"));
 
-function makePage({ demo = false, key = "", respond } = {}) {
+function makePage({ demo = false, respond } = {}) {
     const saved = new Map([["selectedDishIds", "[999]"]]);
     const requests = [];
     const element = () => ({ append() {}, after() {} });
     const context = vm.createContext({
         URL, URLSearchParams, AbortController, setTimeout, clearTimeout, console,
+        crypto: webcrypto,
         location: new URL("https://example.test/9/lunch.html" + (demo ? "?demo=1" : "")),
         document: {
+            cookie: "",
             querySelectorAll: () => [],
             querySelector: element,
             createElement: element
@@ -31,11 +34,9 @@ function makePage({ demo = false, key = "", respond } = {}) {
         }
     });
 
+    vm.runInContext(fs.readFileSync(path.join(root, "../shared/api-config.js"), "utf8"), context);
     for (const file of ["demo.js", "dishes.js", "storage.js", "order.js", "validation.js"]) {
-        let source = fs.readFileSync(path.join(root, file), "utf8");
-        if (key && file === "dishes.js") {
-            source = source.replace('const apiKey = "";', 'const apiKey = "test-key";');
-        }
+        const source = fs.readFileSync(path.join(root, file), "utf8");
         vm.runInContext(source, context, { filename: file });
     }
 
@@ -106,11 +107,12 @@ test("Учебные заказы доступны после повторног
     assert.equal((await otherPage.run("loadOrders()"))[0].full_name, "Тест");
 });
 
-test("Без ключа основной режим не имитирует успех и не делает запросы к заказам", async () => {
+test("Ключ пользователя создаётся один раз в cookie, а не в localStorage", () => {
     const page = makePage();
-    for (const operation of ["sendOrder({})", "loadOrders()", "updateOrderOnServer(1,{})", "deleteOrderOnServer(1)"]) {
-        await assert.rejects(page.run(operation), /API-ключ/);
-    }
+    const firstKey = page.run("getOwnApiKey()");
+    assert.match(firstKey, /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/);
+    assert.equal(page.run("getOwnApiKey()"), firstKey);
+    assert.deepEqual([...page.saved.keys()], ["selectedDishIds"]);
     assert.equal(page.requests.length, 0);
 });
 
@@ -128,7 +130,7 @@ test("Сетевая ошибка объясняется отдельно", asyn
 });
 
 test("Основной режим сохраняет методы GET, POST, PUT, DELETE и api_key в URL", async () => {
-    const page = makePage({ key: "test-key", respond: async (url, options) => ({
+    const page = makePage({ respond: async (url, options) => ({
         ok: true, status: 200,
         json: async () => options.method ? { id: 123 } : []
     }) });
@@ -138,7 +140,8 @@ test("Основной режим сохраняет методы GET, POST, PUT
     await page.run("deleteOrderOnServer(123)");
     assert.deepEqual(page.requests.map((request) => request.options.method || "GET"), ["GET", "POST", "PUT", "DELETE"]);
     for (const request of page.requests) {
-        assert.equal(new URL(request.url).searchParams.get("api_key"), "test-key");
+        assert.equal(new URL(request.url).searchParams.get("api_key"), page.run("getOwnApiKey()"));
+        assert.equal(new URL(request.url).origin, "https://82.23.173.175");
     }
     assert.equal(JSON.parse(page.requests[2].options.body).comment, "Изменено");
 });

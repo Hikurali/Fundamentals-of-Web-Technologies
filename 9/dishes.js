@@ -1,6 +1,5 @@
-const apiBaseUrl = "https://edu.std-900.ist.mospolytech.ru";
-// Персональный ключ из СДО нужно вставить между кавычками.
-const apiKey = "";
+const apiBaseUrl = ownApiBaseUrl;
+let apiKey = "";
 let dishes = [];
 
 function getApiUrl(path) {
@@ -30,7 +29,7 @@ async function requestApi(path, options = {}) {
         if (!response.ok) {
             const message = result && result.error
                 ? result.error
-                : "API Политеха вернул ошибку HTTP " + response.status + ". Попробуйте позже.";
+                : "Сервер вернул ошибку HTTP " + response.status + ". Попробуйте позже.";
             throw new Error(message);
         }
 
@@ -39,17 +38,17 @@ async function requestApi(path, options = {}) {
         }
 
         if (result === undefined || result === null || result.error) {
-            throw new Error((result && result.error) || "API Политеха вернул некорректный ответ");
+            throw new Error((result && result.error) || "Сервер вернул некорректный ответ");
         }
 
         return result;
     } catch (error) {
         if (error.name === "AbortError") {
-            throw new Error("API Политеха не ответил за 12 секунд. Попробуйте позже.");
+            throw new Error("Сервер не ответил за 12 секунд. Попробуйте позже.");
         }
 
         if (error instanceof TypeError) {
-            throw new Error("Не удалось соединиться с API Политеха. Проверьте интернет или попробуйте позже.");
+            throw new Error("Не удалось соединиться с сервером. Проверьте интернет или попробуйте позже.");
         }
 
         throw error;
@@ -89,9 +88,7 @@ async function loadDishes() {
 }
 
 function checkApiKey() {
-    if (apiKey === "") {
-        throw new Error("Для реальных заказов нужен персональный API-ключ из СДО. Сейчас ключ не настроен.");
-    }
+    apiKey = getOwnApiKey();
 }
 
 async function sendOrder(order) {

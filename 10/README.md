@@ -3,7 +3,7 @@
 ## Что сдать
 
 Сайт на сервере:
-http://82.23.173.175/10/index.html
+https://82.23.173.175/10/index.html
 
 Резервная ссылка GitHub Pages:
 https://hikurali.github.io/Fundamentals-of-Web-Technologies/10/index.html
@@ -24,3 +24,7 @@ https://github.com/Hikurali/Fundamentals-of-Web-Technologies/tree/main/10
 - Сохранены страницы меню, оформления и истории заказов из предыдущих работ.
 
 Для проверки формы используйте вымышленные данные.
+
+Страницы меню и заказов используют собственный API `https://82.23.173.175/labs/api`.
+Он заменяет API Политеха по просьбе владельца проекта. Заказы сохраняются в SQLite
+на сервере, доступ определяется UUIDv4 из cookie браузера.

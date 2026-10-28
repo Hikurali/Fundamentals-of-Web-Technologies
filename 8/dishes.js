@@ -1,6 +1,5 @@
-const apiBaseUrl = "https://edu.std-900.ist.mospolytech.ru";
-// Персональный ключ из СДО нужно вставить между кавычками.
-const apiKey = "";
+const apiBaseUrl = ownApiBaseUrl;
+let apiKey = "";
 let dishes = [];
 
 function getApiUrl(path) {
@@ -34,9 +33,7 @@ async function loadDishes() {
 }
 
 async function sendOrder(order) {
-    if (apiKey === "") {
-        throw new Error("Для отправки заказа нужно указать персональный API-ключ");
-    }
+    apiKey = getOwnApiKey();
 
     const response = await fetch(getApiUrl("/labs/api/orders"), {
         method: "POST",

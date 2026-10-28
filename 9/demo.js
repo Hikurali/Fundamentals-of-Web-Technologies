@@ -103,7 +103,7 @@ function showServiceError(error) {
         message.append(demoLink);
 
         const note = document.createElement("p");
-        note.textContent = "В учебном режиме можно проверить меню и заказы без API Политеха. Данные сохраняются только в этом браузере.";
+        note.textContent = "В учебном режиме можно проверить меню и заказы без сервера. Данные сохраняются только в этом браузере.";
         message.append(note);
     }
 }
@@ -124,13 +124,13 @@ if (demoMode) {
     const notice = document.createElement("aside");
     notice.className = "demo-notice";
     const text = document.createElement("p");
-    text.textContent = "Учебный режим: меню из локального файла, заказы сохраняются в этом браузере. API Политеха не используется.";
+    text.textContent = "Учебный режим: меню из локального файла, заказы сохраняются только в этом браузере. Чтобы сохранять их на сервере, перейдите в основной режим.";
 
     const exitLink = document.createElement("a");
     const normalUrl = new URL(location.href);
     normalUrl.searchParams.delete("demo");
     exitLink.href = normalUrl.toString();
-    exitLink.textContent = "Вернуться к API Политеха";
+    exitLink.textContent = "Перейти к заказам на сервере";
     notice.append(text, exitLink);
     document.querySelector("header").after(notice);
 }

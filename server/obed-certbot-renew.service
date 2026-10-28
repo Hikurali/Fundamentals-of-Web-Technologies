@@ -1,0 +1,7 @@
+[Unit]
+Description=Renew HTTPS certificate for Obed Ryadom
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/obed-certbot/bin/certbot renew --quiet
