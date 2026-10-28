@@ -95,6 +95,41 @@ li {
     color: tomato;
 }
 
+.demo-notice,
+.service-error {
+    margin: 15px 30px;
+    padding: 16px 20px;
+    border: 1px solid #b6b6b6;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+}
+
+.service-error {
+    margin: 15px 0 30px;
+}
+
+.demo-notice p,
+.service-error p {
+    margin: 0 0 12px;
+}
+
+.demo-notice a,
+.service-error a {
+    display: inline-block;
+    color: #b63822;
+    text-decoration: underline;
+}
+
+.service-error button {
+    margin: 0 12px 12px 0;
+    padding: 10px 14px;
+    border: 1px solid #777777;
+    border-radius: 6px;
+    font: inherit;
+    background-color: white;
+    cursor: pointer;
+}
+
 @media (max-width: 800px) {
     .navigation {
         justify-content: space-between;

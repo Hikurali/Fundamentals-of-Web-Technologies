@@ -13,14 +13,69 @@ function getApiUrl(path) {
     return url.toString();
 }
 
-async function loadDishes() {
-    const response = await fetch(getApiUrl("/labs/api/dishes"));
+async function requestApi(path, options = {}) {
+    const controller = new AbortController();
+    const timeout = setTimeout(function () {
+        controller.abort();
+    }, 12000);
 
-    if (!response.ok) {
-        throw new Error("Не удалось загрузить блюда");
+    try {
+        const response = await fetch(getApiUrl(path), Object.assign({}, options, {
+            signal: controller.signal
+        }));
+        const result = await response.json().catch(function () {
+            return undefined;
+        });
+
+        if (!response.ok) {
+            const message = result && result.error
+                ? result.error
+                : "API Политеха вернул ошибку HTTP " + response.status + ". Попробуйте позже.";
+            throw new Error(message);
+        }
+
+        if (response.status === 204) {
+            return {};
+        }
+
+        if (result === undefined || result === null || result.error) {
+            throw new Error((result && result.error) || "API Политеха вернул некорректный ответ");
+        }
+
+        return result;
+    } catch (error) {
+        if (error.name === "AbortError") {
+            throw new Error("API Политеха не ответил за 12 секунд. Попробуйте позже.");
+        }
+
+        if (error instanceof TypeError) {
+            throw new Error("Не удалось соединиться с API Политеха. Проверьте интернет или попробуйте позже.");
+        }
+
+        throw error;
+    } finally {
+        clearTimeout(timeout);
+    }
+}
+
+async function loadDishes() {
+    let data;
+
+    if (demoMode) {
+        const response = await fetch("demo-dishes.json");
+
+        if (!response.ok) {
+            throw new Error("Не удалось загрузить учебное меню");
+        }
+
+        data = await response.json();
+    } else {
+        data = await requestApi("/labs/api/dishes");
     }
 
-    const data = await response.json();
+    if (!Array.isArray(data)) {
+        throw new Error("Получен некорректный список блюд");
+    }
 
     dishes = data.map(function (dish) {
         if (dish.category === "salad") {
@@ -33,82 +88,58 @@ async function loadDishes() {
     return dishes;
 }
 
-async function sendOrder(order) {
-    if (apiKey === "") {
-        throw new Error("Для отправки заказа нужно указать персональный API-ключ");
-    }
-
-    const response = await fetch(getApiUrl("/labs/api/orders"), {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(order)
-    });
-
-    const result = await response.json().catch(function () {
-        return {};
-    });
-
-    if (!response.ok) {
-        throw new Error(result.error || "Не удалось оформить заказ");
-    }
-
-    return result;
-}
-
 function checkApiKey() {
     if (apiKey === "") {
-        throw new Error("Для работы с заказами нужно указать персональный API-ключ");
+        throw new Error("Для реальных заказов нужен персональный API-ключ из СДО. Сейчас ключ не настроен.");
     }
+}
+
+async function sendOrder(order) {
+    if (demoMode) {
+        return saveDemoOrder(order);
+    }
+
+    checkApiKey();
+    return requestApi("/labs/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(order)
+    });
 }
 
 async function loadOrders() {
-    checkApiKey();
-    const response = await fetch(getApiUrl("/labs/api/orders"));
-    const result = await response.json().catch(function () {
-        return {};
-    });
+    if (demoMode) {
+        return getDemoOrders();
+    }
 
-    if (!response.ok) {
-        throw new Error(result.error || "Не удалось загрузить заказы");
+    checkApiKey();
+    const result = await requestApi("/labs/api/orders");
+
+    if (!Array.isArray(result)) {
+        throw new Error("Получен некорректный список заказов");
     }
 
     return result;
 }
 
 async function updateOrderOnServer(orderId, orderData) {
-    checkApiKey();
-    const response = await fetch(getApiUrl("/labs/api/orders/" + orderId), {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(orderData)
-    });
-    const result = await response.json().catch(function () {
-        return {};
-    });
-
-    if (!response.ok) {
-        throw new Error(result.error || "Не удалось изменить заказ");
+    if (demoMode) {
+        return updateDemoOrder(orderId, orderData);
     }
 
-    return result;
+    checkApiKey();
+    return requestApi("/labs/api/orders/" + orderId, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData)
+    });
 }
 
 async function deleteOrderOnServer(orderId) {
-    checkApiKey();
-    const response = await fetch(getApiUrl("/labs/api/orders/" + orderId), {
-        method: "DELETE"
-    });
-    const result = await response.json().catch(function () {
-        return {};
-    });
-
-    if (!response.ok) {
-        throw new Error(result.error || "Не удалось удалить заказ");
+    if (demoMode) {
+        return deleteDemoOrder(orderId);
     }
 
-    return result;
+    checkApiKey();
+    return requestApi("/labs/api/orders/" + orderId, { method: "DELETE" });
 }

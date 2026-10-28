@@ -274,7 +274,7 @@ editForm.addEventListener("submit", async function (event) {
     try {
         await updateOrderOnServer(editedOrderId, orderData);
         closeModal(document.getElementById("edit-modal"));
-        showNotification("Заказ успешно изменён");
+        showNotification(demoMode ? "Учебный заказ изменён" : "Заказ успешно изменён");
         await loadAndDisplayOrders();
     } catch (error) {
         showNotification("Ошибка: " + error.message);
@@ -291,7 +291,7 @@ document.querySelector(".delete-confirm-button").addEventListener("click", async
     try {
         await deleteOrderOnServer(deletedOrderId);
         closeModal(document.getElementById("delete-modal"));
-        showNotification("Заказ успешно удалён");
+        showNotification(demoMode ? "Учебный заказ удалён" : "Заказ успешно удалён");
         await loadAndDisplayOrders();
     } catch (error) {
         showNotification("Ошибка: " + error.message);
@@ -308,12 +308,16 @@ async function loadAndDisplayOrders() {
 
 async function startOrdersPage() {
     try {
+        if (!demoMode) {
+            checkApiKey();
+        }
         await loadDishes();
         await loadAndDisplayOrders();
     } catch (error) {
         ordersMessage.hidden = false;
-        ordersMessage.textContent = "Ошибка: " + error.message;
+        ordersMessage.textContent = "История заказов пока недоступна.";
         tableWrapper.hidden = true;
+        showServiceError(error);
         console.error(error);
     }
 }

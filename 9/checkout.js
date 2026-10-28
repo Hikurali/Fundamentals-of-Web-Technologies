@@ -128,7 +128,9 @@ orderForm.addEventListener("submit", async function (event) {
         updateOrderInformation();
         orderForm.reset();
         deliveryTime.required = false;
-        showNotification("Заказ успешно оформлен");
+        showNotification(demoMode
+            ? "Учебный заказ сохранён в этом браузере"
+            : "Заказ успешно оформлен");
     } catch (error) {
         showNotification("Ошибка: " + error.message);
         console.error(error);
@@ -144,7 +146,8 @@ async function startOrderPage() {
         displayOrderDishes();
         updateOrderInformation();
     } catch (error) {
-        orderLoadMessage.textContent = "Не удалось загрузить блюда. Попробуйте обновить страницу позже.";
+        orderLoadMessage.hidden = true;
+        showServiceError(error);
         console.error(error);
     }
 }

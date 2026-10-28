@@ -1,4 +1,4 @@
-const orderStorageKey = "selectedDishIds";
+const orderStorageKey = demoMode ? "lab9DemoSelectedDishIds" : "selectedDishIds";
 
 function getSelectedDishIds() {
     const savedIds = localStorage.getItem(orderStorageKey);

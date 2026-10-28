@@ -15,7 +15,8 @@ async function startPage() {
         setupOrder();
         setupFilters();
     } catch (error) {
-        showLoadMessage("Не удалось загрузить блюда. Попробуйте обновить страницу позже.");
+        showLoadMessage("");
+        showServiceError(error);
         console.error(error);
     }
 }
